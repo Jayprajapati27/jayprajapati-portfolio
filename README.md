@@ -144,4 +144,3 @@ Give this repository a ⭐ on GitHub
 ### ⚡ Designed & Developed by Jay Prajapati
 
 </div>
-```
