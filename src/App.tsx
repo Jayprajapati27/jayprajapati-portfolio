@@ -21,7 +21,7 @@ export default function App() {
   useLenis();
 
   return (
-    <main className="bg-[#050505] min-h-screen selection:bg-[#F27D26] selection:text-white">
+    <main className="bg-[#050505] min-h-screen selection:bg-[#F27D26] selection:text-white overflow-x-hidden">
       <CustomCursor />
       {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
       

@@ -129,7 +129,7 @@ export default function Hero() {
         glowColors={["#F27D26", "#a87cff", "#c481ff"]} // Matched to your original theme
         glowCount={12}
       >
-        <div className="z-10 w-full h-full px-6 md:px-20 flex flex-col lg:flex-row justify-center lg:items-center pt-32 pb-24 lg:py-0 relative gap-16 lg:gap-32 max-w-7xl mx-auto">
+        <div className="z-10 w-full h-full px-6 md:px-20 flex flex-col lg:flex-row justify-center lg:items-center pt-28 pb-16 lg:py-0 relative gap-8 lg:gap-32 max-w-7xl mx-auto">
           {/* LEFT SIDE */}
           <div className="flex flex-col relative z-20 w-full lg:w-1/2 items-start lg:items-end">
             <span
@@ -141,10 +141,10 @@ export default function Hero() {
 
             <h1 ref={titleRef} className="flex flex-col font-heading font-bold leading-[1.1] tracking-wide uppercase text-white">
               <div className="flex justify-start lg:justify-end overflow-visible">
-                <span ref={name1Ref} className="inline-block text-2xl md:text-5xl lg:text-[40px] opacity-0">JAY</span>
+                <span ref={name1Ref} className="inline-block text-5xl md:text-7xl lg:text-[80px] opacity-0">JAY</span>
               </div>
               <div className="flex justify-start lg:justify-end overflow-visible -mt-2">
-                <span ref={name2Ref} className="inline-block text-2xl md:text-5xl lg:text-[40px] opacity-0">PRAJAPATI</span>
+                <span ref={name2Ref} className="inline-block text-5xl md:text-7xl lg:text-[80px] opacity-0">PRAJAPATI</span>
               </div>
             </h1>
           </div>
@@ -159,10 +159,9 @@ export default function Hero() {
                 A Software
               </span>
 
-              {/* LAYERED TEXT BLOCK */}
               <div
                 ref={titlesWrapperRef}
-                className="relative font-heading font-bold overflow-hidden flex items-center justify-start h-[80px] md:h-[100px] lg:h-[120px] w-[150vw] sm:w-[800px] lg:w-[1200px]"
+                className="relative font-heading font-bold overflow-hidden flex items-center justify-start h-[80px] md:h-[100px] lg:h-[120px] w-[120vw] sm:w-[800px] lg:w-[1200px]"
               >
                 <div className="title-word-0 flex absolute z-0 inset-y-0 items-center justify-start whitespace-nowrap -translate-y-[20px]">
                   {renderLetters("DEVELOPER", 0, true)}

@@ -1,6 +1,7 @@
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect } from 'react';
 import { cn } from '@/src/lib/utils';
+import { Menu, X } from 'lucide-react';
 
 const navLinks = [
   { name: "About", href: "#about" },
@@ -13,6 +14,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState(navLinks[0].name);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -135,55 +137,113 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* Premium Awwwards-Style 'Hire Me' Button */}
-        <motion.a 
-          href="#contact"
-          onClick={(e) => handleAnchorClick(e, '#contact')}
-          className="relative group inline-block"
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 400, damping: 25 }}
-        >
-          {/* Smooth Breathing Ambient Neon Purple Glow */}
-          <motion.div 
-            className="absolute inset-0 bg-[#9333EA] rounded-full blur-[10px] group-hover:blur-[16px] transition-all duration-500"
-            animate={{ 
-              opacity: [0.3, 0.5, 0.3],
-              scale: [0.98, 1.03, 0.98]
+        {/* Premium Awwwards-Style 'Hire Me' Button & Hamburger */}
+        <div className="flex items-center gap-4">
+          <motion.a 
+            href="#contact"
+            onClick={(e) => {
+              handleAnchorClick(e, '#contact');
+              setIsMobileMenuOpen(false);
             }}
-            transition={{ 
-              duration: 3, 
-              repeat: Infinity,
-              ease: "easeInOut" 
-            }}
-          />
-
-          {/* Core Premium Button Base - Dark Purple BG / White Text */}
-          <div className="relative flex items-center justify-center px-5 py-2 bg-[#3B0764] text-white font-mono text-[12px] font-bold uppercase tracking-widest rounded-full overflow-hidden border border-white/30 group-hover:border-[#C084FC]/80 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] group-hover:shadow-[inset_0_0_15px_rgba(147,51,234,0.6),0_0_20px_rgba(147,51,234,0.8)] transition-all duration-500">
-            
-            {/* Glossy Top Edge Highlight */}
-            <div className="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-white/60 to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-            {/* Animated Light Sweep Effect */}
-            <motion.div
-              className="absolute -inset-y-2 w-[150%] bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[25deg]"
-              initial={{ x: "-150%" }}
-              animate={{ x: "150%" }}
-              transition={{
+            className="relative group inline-block hidden sm:inline-block"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+          >
+            {/* Smooth Breathing Ambient Neon Purple Glow */}
+            <motion.div 
+              className="absolute inset-0 bg-[#9333EA] rounded-full blur-[10px] group-hover:blur-[16px] transition-all duration-500"
+              animate={{ 
+                opacity: [0.3, 0.5, 0.3],
+                scale: [0.98, 1.03, 0.98]
+              }}
+              transition={{ 
+                duration: 3, 
                 repeat: Infinity,
-                duration: 2.2,
-                ease: "easeInOut",
-                repeatDelay: 1.5,
+                ease: "easeInOut" 
               }}
             />
 
-            {/* Typography with subtle glowing drop-shadow on hover */}
-            <span className="relative z-10 transition-all duration-300 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
-              Hire Me
-            </span>
-          </div>
-        </motion.a>
+            {/* Core Premium Button Base - Dark Purple BG / White Text */}
+            <div className="relative flex items-center justify-center px-5 py-2 bg-[#3B0764] text-white font-mono text-[12px] font-bold uppercase tracking-widest rounded-full overflow-hidden border border-white/30 group-hover:border-[#C084FC]/80 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] group-hover:shadow-[inset_0_0_15px_rgba(147,51,234,0.6),0_0_20px_rgba(147,51,234,0.8)] transition-all duration-500">
+              
+              {/* Glossy Top Edge Highlight */}
+              <div className="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-white/60 to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              {/* Animated Light Sweep Effect */}
+              <motion.div
+                className="absolute -inset-y-2 w-[150%] bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[25deg]"
+                initial={{ x: "-150%" }}
+                animate={{ x: "150%" }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 2.2,
+                  ease: "easeInOut",
+                  repeatDelay: 1.5,
+                }}
+              />
+
+              {/* Typography with subtle glowing drop-shadow on hover */}
+              <span className="relative z-10 transition-all duration-300 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
+                Hire Me
+              </span>
+            </div>
+          </motion.a>
+
+          <button 
+            className="md:hidden text-white p-2 -mr-2"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="absolute top-full left-0 w-full bg-[#050505]/95 backdrop-blur-xl border-b border-white/5 overflow-hidden md:hidden shadow-2xl"
+          >
+            <div className="flex flex-col py-6 px-6 gap-6">
+              {navLinks.map((link) => {
+                const isActive = activeTab === link.name;
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => {
+                      handleAnchorClick(e, link.href);
+                      setActiveTab(link.name);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className={cn(
+                      "font-mono text-lg uppercase tracking-[0.2em] transition-colors py-2 border-b border-white/5",
+                      isActive ? "text-[#F27D26]" : "text-white/70 hover:text-white"
+                    )}
+                  >
+                    {link.name}
+                  </a>
+                );
+              })}
+              
+              <a 
+                href="#contact"
+                onClick={(e) => {
+                  handleAnchorClick(e, '#contact');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="mt-4 flex sm:hidden items-center justify-center px-5 py-3 bg-[#F27D26] text-white font-mono text-[12px] font-bold uppercase tracking-widest rounded-full"
+              >
+                Hire Me
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }

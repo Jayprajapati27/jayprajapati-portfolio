@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 
 interface Particle {
@@ -15,6 +15,7 @@ interface Particle {
 }
 
 export default function CustomCursor() {
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const cursorRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
@@ -24,6 +25,21 @@ export default function CustomCursor() {
   const moveTimer = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    const checkTouch = () => {
+      if (window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 1024) {
+        setIsTouchDevice(true);
+      } else {
+        setIsTouchDevice(false);
+      }
+    };
+    checkTouch();
+    window.addEventListener('resize', checkTouch);
+    return () => window.removeEventListener('resize', checkTouch);
+  }, []);
+
+  useEffect(() => {
+    if (isTouchDevice) return;
+
     // Inject a global style to hide the default cursor rigorously
     const styleTag = document.createElement('style');
     styleTag.id = 'hide-default-cursor';
@@ -224,7 +240,9 @@ export default function CustomCursor() {
       cancelAnimationFrame(animationFrameId);
       if (moveTimer.current) clearTimeout(moveTimer.current);
     };
-  }, []);
+  }, [isTouchDevice]);
+
+  if (isTouchDevice) return null;
 
   return (
     <>

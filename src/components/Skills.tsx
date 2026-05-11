@@ -21,7 +21,7 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 px-6 bg-[#050505] border-y border-white/5">
+    <section id="skills" className="py-16 md:py-24 px-6 bg-[#050505] border-y border-white/5">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -29,7 +29,7 @@ export default function Skills() {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h2 className="text-5xl md:text-7xl font-mono font-bold tracking-tighter uppercase text-white">
+          <h2 className="text-4xl md:text-7xl font-mono font-bold tracking-tighter uppercase text-white">
             Technical <br /> <span className="text-[#F27D26]">Skills</span>
           </h2>
         </motion.div>
