@@ -1,0 +1,33 @@
+# node_modules/
+# build/
+# dist/
+# coverage/
+# .DS_Store
+# *.log
+# .env*
+# !.env.example
+
+# Dependencies
+node_modules/
+venv/
+vendor/
+
+# Build & dist
+/dist/
+/build/
+/temp/
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
